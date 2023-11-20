@@ -3,11 +3,7 @@ import mongoose from "mongoose";
 const connectDB = async () => {
   const dburi : any = process.env.DB;
   try {
-    const conn = await mongoose.connect(
-        dburi, 
-        {
-      
-    });
+    const conn = await mongoose.connect(dburi);
 
     console.log(`Connected to Database : `);
   } catch (error) {
