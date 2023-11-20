@@ -1,13 +1,10 @@
-// Home/main.js
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MovieCard from '../Home/movieCard';
 
-// Define a type for the movie object
 type Movie = {
   _id: string;
-  // Add other properties based on your actual movie object
-  // For example: name, image, imdbRating, releaseDate, etc.
   name: string;
   image: string;
   imdbRating: string;

@@ -4,12 +4,6 @@ import {useRouter} from "next/router"
 import React from 'react'
 
 const movieCard = ({movie} : any) => {
-    // const { name, image, imdbRating, releaseDate,} = movie;
-
-
-
-
-  
   const router = useRouter();
 
   let id : any = "";
@@ -19,8 +13,9 @@ const movieCard = ({movie} : any) => {
   let releaseDate : any ="";
 
   if(movie){
+    console.log(movie);
     name = movie.name
-    image = movie.image
+    image = movie.imageUrl
     imdbRating = movie.imdbRating
     releaseDate = movie.releaseDate
     id = movie._id
@@ -33,12 +28,12 @@ const movieCard = ({movie} : any) => {
   
   return (
         <>
-    <div className="mx-auto bg-white shadow-md overflow-hidden rounded-md w-72 h-80 hover:cursor-pointer" onClick={movieLink}>
-      <img className="w-full h-48 object-cover" src={image} alt={image} />
-      <div className="p-6">
-        <h2 className="text-xl font-semibold text-gray-800">Download {name} full Movie</h2>
+    <div className="mx-auto bg-white shadow-md items-center rounded-md w-72 h-[350px] hover:cursor-pointer" onClick={movieLink}>
+    <img className="w-[280px] h-64 object-cover mx-auto" src={image} alt={name} />
+      <div className="p-1">
+        <h2 className="text-xl font-semibold text-gray-800">Download Full Movie {name}</h2>
         <p className="text-gray-600 mb-4">Released on: {releaseDate}</p>
-        <p className="text-gray-700">IMDb Rating: {imdbRating}</p>
+        
       </div>
       
     </div>

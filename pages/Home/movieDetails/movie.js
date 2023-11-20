@@ -3,22 +3,16 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import DP from "../../Ads/dreamplanner";
 import Styler from "../../Ads/stylers";
-import Link from "next/dist/client/link";
-import { redirect } from "next/dist/server/api-utils";
+
 
 const MovieDetail = () => {
-  const [movie, setMovie] = useState(null);
   const [countdown, setCountdown] = useState(10); // Initial countdown value
   const [showButton, setShowButton] = useState(false); // State to control button visibility
   const router = useRouter();
   const {name,cat, downloadUri} = router.query;
-  
-  
-  
-
-  const url = "https://google.com";
 
   useEffect(() => {
+
     const countdownInterval = setInterval(() => {
       setCountdown((prevCountdown) => prevCountdown - 1);
     }, 1000);
@@ -26,11 +20,12 @@ const MovieDetail = () => {
       setShowButton(true);
       clearInterval(countdownInterval);
     }
+    
     return () => clearInterval(countdownInterval);
   }, [countdown]);
 
   const downloadBtn = () =>{
-    router.push(url)
+    router.push(downloadUri)
   }
   
 
