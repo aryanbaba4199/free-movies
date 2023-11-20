@@ -1,0 +1,11 @@
+/* styles/globals.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+html, body {
+    background-color: #2a323b; /* Slate color */
+  }
+
+
