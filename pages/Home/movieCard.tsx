@@ -3,7 +3,7 @@ import React from 'react';
 import {useRouter} from "next/router"
 const MovieCard = ({movie} : any) => {
   const { name, image, imdbRating, releaseDate,} = movie;
-  const id = movie._id;
+  const id : any = movie._id;
   const router = useRouter();
 
   const movieLink = () => {
