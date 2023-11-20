@@ -59,7 +59,7 @@ export default async function handler(req, res) {
       console.log(movie);
       const savedMovie = await movie.save();
       console.log("Movie saved successfully", savedMovie);
-      res.status(201).json({ message: 'Movie saved successfully' });
+      res.status(200).json({ message: 'Movie saved successfully' });
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ error: 'Internal Server Error' });

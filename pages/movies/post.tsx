@@ -6,9 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Home() {
 
   type Size = {
-    downloadUri: string;
+    downloadUri: any;
   };
-  
+
   type MovieData = {
     name: string;
     imageUrl: string;
@@ -18,15 +18,16 @@ export default function Home() {
     scUrl: string[];
     category: string;
     quality: string;
-    type?: string;
+    type: any;
     sizes: {
       '480P': Size;
       '720P': Size;
       '1080P': Size;
       '4K': Size;
     };
+    size: any;
   };
-  
+
 
   const [movieData, setMovieData] = useState({
     name: '',
@@ -37,6 +38,7 @@ export default function Home() {
     scUrl: [],
     category: '',
     quality: '',
+    type: '',
     sizes: {
       '480P': { downloadUri: '' },
       '720P': { downloadUri: '' },
@@ -45,26 +47,30 @@ export default function Home() {
     },
   });
 
-  const handleChange = (e : any) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setMovieData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleScreenshotChange = (e : any) => {
+  const handleScreenshotChange = (e: any) => {
     const { name, value } = e.target;
 
     if (name === 'downloadUri') {
       setMovieData((prevData) => ({ ...prevData, downloadUri: value }));
     } else if (name === 'screenshotUrls') {
       const screenshotUrl = value;
-      setMovieData((prevData : any) => ({
+      setMovieData((prevData: any) => ({
         ...prevData,
         scUrl: [...prevData.scUrl, screenshotUrl],
       }));
     }
   };
 
-  const handleSizeChange = (size : any, field : any, value : any) => {
+  const handleSizeChange = (
+    size: '480P' | '720P' | '1080P' | '4K',
+    field: keyof Size,
+    value: string
+  ) => {
     setMovieData((prevData) => ({
       ...prevData,
       sizes: {
@@ -77,7 +83,8 @@ export default function Home() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     try {
@@ -86,7 +93,7 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
       });
-      if (response.status === 201) {
+      if (response.status === 200) {
         setMovieData({
           name: '',
           imageUrl: '',
@@ -96,6 +103,7 @@ export default function Home() {
           scUrl: [],
           category: '',
           quality: '',
+          type: '',
           sizes: {
             '480P': { downloadUri: '' },
             '720P': { downloadUri: '' },
@@ -105,6 +113,9 @@ export default function Home() {
         });
         console.log('Movie Saved Successfully');
         toast('Movie Saved Successfully');
+      }
+      else{
+        toast("Something went wrong")
       }
     } catch (error) {
       console.error('Error submitting data:', error);
@@ -242,7 +253,7 @@ export default function Home() {
               <label className="block text-white text-sm font-bold mb-2">
                 Sizes
               </label>
-              {Object.keys(movieData.sizes).map((size) => (
+              {Object.entries(movieData.sizes).map(([size, sizeData]) => (
                 <div key={size} className="mb-2">
                   <span className="text-white">{size}</span>
                   <div className="ml-4">
@@ -251,15 +262,16 @@ export default function Home() {
                     </label>
                     <input
                       type="text"
-                      value={movieData.sizes[size].downloadUri}
+                      value={sizeData.downloadUri}
                       onChange={(e) =>
-                        handleSizeChange(size, 'downloadUri', e.target.value)
+                        handleSizeChange(size as keyof typeof movieData.sizes, 'downloadUri', e.target.value)
                       }
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                   </div>
                 </div>
               ))}
+
             </div>
           )}
           <div className="flex items-center justify-between">
