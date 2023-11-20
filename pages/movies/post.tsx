@@ -4,6 +4,30 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
+
+  type Size = {
+    downloadUri: string;
+  };
+  
+  type MovieData = {
+    name: string;
+    imageUrl: string;
+    imdbRating: string;
+    releaseDate: string;
+    downloadUri: string;
+    scUrl: string[];
+    category: string;
+    quality: string;
+    type?: string;
+    sizes: {
+      '480P': Size;
+      '720P': Size;
+      '1080P': Size;
+      '4K': Size;
+    };
+  };
+  
+
   const [movieData, setMovieData] = useState({
     name: '',
     imageUrl: '',
@@ -33,14 +57,14 @@ export default function Home() {
       setMovieData((prevData) => ({ ...prevData, downloadUri: value }));
     } else if (name === 'screenshotUrls') {
       const screenshotUrl = value;
-      setMovieData((prevData) => ({
+      setMovieData((prevData : any) => ({
         ...prevData,
         scUrl: [...prevData.scUrl, screenshotUrl],
       }));
     }
   };
 
-  const handleSizeChange = (size, field, value) => {
+  const handleSizeChange = (size : any, field : any, value : any) => {
     setMovieData((prevData) => ({
       ...prevData,
       sizes: {
