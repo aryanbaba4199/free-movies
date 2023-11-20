@@ -1,7 +1,7 @@
 // MovieCard.js
 import React from 'react';
 import {useRouter} from "next/router"
-import Movie from "./movieDetails/movie"
+
 
 const MovieCard = ({ movie}) => {
 
