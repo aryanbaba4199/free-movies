@@ -1,19 +1,20 @@
 // Home/main.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import MovieCard from './movieCard';
+import MovieCard from '../Home/movieCard';
 
-
+// Define a type for the movie object
 type Movie = {
   _id: string;
-
+  // Add other properties based on your actual movie object
+  // For example: name, image, imdbRating, releaseDate, etc.
   name: string;
   image: string;
   imdbRating: string;
   releaseDate: string;
 };
 
-const MainPart = () => {
+const MainPart: React.FC = () => {
   const [movies, setMovies] = useState<Movie[] | undefined>(undefined);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const MainPart = () => {
   }, []);
 
   if (!movies) {
-    return "Loading";
+    return <div>Loading</div>;
   }
 
   return (
