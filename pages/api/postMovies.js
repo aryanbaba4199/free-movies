@@ -5,7 +5,9 @@ import Movies from '../../lib/Schema/movieSchema';
 export default async function handler(req, res) {
   await connectDb();
   const id = req?.query?.id?.trim();
-  console.log(id);
+  
+
+
   const message = req?.query?.message;
   if (message) {
     try {
@@ -16,12 +18,16 @@ export default async function handler(req, res) {
       res.status(500).json({ error: "Internal Server Error" });
     }
   }
-  else if (!message) {
+
+
+
+  else if (req.method === 'GET') {
+    
     try {
       const data = await Movies.find();
       res.status(200).json(data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.log("Error fetching data:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   }

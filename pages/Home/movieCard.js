@@ -5,7 +5,7 @@ import {useRouter} from "next/router"
 
 const MovieCard = ({ movie}) => {
 
-  const { name, image, imdbRating, releaseDate, _id } = movie;
+  const { name, image, imdbRating, releaseDate,} = movie;
   const id = movie._id;
   const router = useRouter();
 
