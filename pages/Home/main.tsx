@@ -1,28 +1,42 @@
 // Home/main.js
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import MovieCard from '../Home/movieCard';
+import MovieCard from './movieCard';
 
+
+type Movie = {
+  _id: string;
+
+  name: string;
+  image: string;
+  imdbRating: string;
+  releaseDate: string;
+};
 
 const MainPart = () => {
-  const [movies, setMovie] = useState(null);
+  const [movies, setMovies] = useState<Movie[] | undefined>(undefined);
 
   useEffect(() => {
-      const fetchmovie = async () => {
-        const res = await axios.get("/api/postMovies");
-        setMovie(res.data);
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get("/api/postMovies");
+        setMovies(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
-    fetchmovie()
-  },[]);
-  if(!movies){
-    return "Loading"
-  }
+    };
 
+    fetchMovies();
+  }, []);
+
+  if (!movies) {
+    return "Loading";
+  }
 
   return (
     <div className="min-h-screen bg-black text-white p-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {movies.map((movie: any) => (
+        {movies.map((movie) => (
           <MovieCard key={movie._id} movie={movie} />
         ))}
       </div>
