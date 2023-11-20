@@ -9,10 +9,10 @@ const movieCard = ({movie} : any) => {
 
 
 
-  const id : any = movie._id;
+  
   const router = useRouter();
 
-
+  let id : any = "";
   let name : any = "";
   let image : any = "";
   let imdbRating : any ="";
@@ -23,6 +23,7 @@ const movieCard = ({movie} : any) => {
     image = movie.image
     imdbRating = movie.imdbRating
     releaseDate = movie.releaseDate
+    id = movie._id
   }
   
 
