@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const connectDB = async () => {
-  const dburi = process.env.DB;
+  const dburi : any = process.env.DB;
   try {
     const conn = await mongoose.connect(
         dburi, 
