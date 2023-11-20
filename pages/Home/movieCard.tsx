@@ -30,9 +30,11 @@
 
 import React from 'react'
 
-export default function movieCard() {
+const movieCard = ({movie} : any) => {
   return (
     <div>movieCard</div>
   )
 }
+
+export default movieCard
 
