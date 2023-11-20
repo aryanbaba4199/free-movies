@@ -1,10 +1,7 @@
 // MovieCard.js
 import React from 'react';
 import {useRouter} from "next/router"
-
-
-const MovieCard = ({ movie}) => {
-
+const MovieCard = ({movie} : any) => {
   const { name, image, imdbRating, releaseDate,} = movie;
   const id = movie._id;
   const router = useRouter();
@@ -30,3 +27,5 @@ const MovieCard = ({ movie}) => {
 };
 
 export default MovieCard;
+
+
