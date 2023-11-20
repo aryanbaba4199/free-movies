@@ -21,12 +21,12 @@ export default function Home() {
     },
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e : any) => {
     const { name, value } = e.target;
     setMovieData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleScreenshotChange = (e) => {
+  const handleScreenshotChange = (e : any) => {
     const { name, value } = e.target;
 
     if (name === 'downloadUri') {
@@ -186,7 +186,7 @@ export default function Home() {
             </label>
             <select
               name="type"
-              value={movieData.type}
+              value={movieData?.type}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             >
